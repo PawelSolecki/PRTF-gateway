@@ -5,5 +5,17 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: api-gateway
+    environment:
+      - SERVICE_USER_URL=http://user-service:8081
+      - SERVICE_PORTFOLIO_URL=http://portfolio-service:8082
+      - SERVICE_FRONTEND_URL=http://frontend:3000
+      - SERVICE_GATEWAY_URL=http://api-gateway:8090
     ports:
-      - "8090:8080"
+      - "8090:8090"
+    networks:
+      - PRTF-network
+
+networks:
+  PRTF-network:
+    driver: bridge
+    external: true
